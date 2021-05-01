@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users, :path_names => {
+      :verify_authy => "/verify-token",
+      :enable_authy => "/enable-two-factor",
+      :verify_authy_installation => "/verify-installation",
+      :authy_onetouch_status => "/onetouch-status"
+  }, controllers: { sessions: 'users/sessions' }
   root to: "home#index"
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-end
+  end
