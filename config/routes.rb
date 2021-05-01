@@ -5,5 +5,8 @@ Rails.application.routes.draw do
       :verify_authy_installation => "/verify-installation",
       :authy_onetouch_status => "/onetouch-status"
   }, controllers: { sessions: 'users/sessions' }
-  root to: "home#index"
-  end
+  get "/profile", to: "home#index"
+  root to: "articles#index"
+  resources :articles
+  match '*path', to: ->(env) { [404, {}, ['Not Found']] }, via: :all
+end
